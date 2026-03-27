@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Abdou English">
+<meta name="theme-color" content="#070712">
+<title>Abdou English</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#070712;--s1:#0e0e1c;--s2:#141428;--s3:#1c1c34;--s4:#242440;--bdr:rgba(255,255,255,0.07);--bdr2:rgba(255,255,255,0.12);--v:#8b5cf6;--v2:#a78bfa;--v3:#c4b5fd;--vg:rgba(139,92,246,0.35);--g:#10b981;--g2:#34d399;--gg:rgba(16,185,129,0.3);--r:#ef4444;--o:#f97316;--gold:#eab308;--b:#3b82f6;--p:#ec4899;--t1:#f0f0ff;--t2:#a0a0c0;--t3:#606080;--t4:#363656;--tab:74px;--safe:env(safe-area-inset-bottom,0px);--R:20px;--Rs:13px}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+#app{display:flex;flex-direction:column;height:100dvh;max-width:430px;margin:0 auto;position:relative;overflow:hidden;background:var(--bg)}
+.pg{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab) + var(--safe) + 24px);display:none}
+.pg.on{display:block;animation:up .28s ease both}
+.pg::-webkit-scrollbar{display:none}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:calc(var(--tab) + var(--safe));background:rgba(7,7,18,0.92);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-top:1px solid var(--bdr);display:flex;padding-top:8px;z-index:200}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:5px 0}
+.ti{width:44px;height:44px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:21px;transition:all .3s cubic-bezier(.34,1.56,.64,1)}
+.tab.on .ti{background:linear-gradient(135deg,var(--v),#7c3aed);box-shadow:0 4px 18px var(--vg);transform:scale(1.08) translateY(-3px)}
+.tl{font-size:10px;font-weight:700;color:var(--t4);letter-spacing:.3px;transition:color .2s}
+.tab.on .tl{color:var(--v3)}
+.phead{padding:54px 18px 16px;background:linear-gradient(180deg,rgba(139,92,246,0.08),transparent)}
+.ptag{display:inline-flex;align-items:center;gap:5px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.28);color:var(--v3);font-size:11px;font-weight:700;padding:5px 12px;border-radius:100px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:10px}
+.phead h1{font-size:28px;font-weight:800;line-height:1.1;letter-spacing:-.3px}
+.phead p{font-size:13px;color:var(--t2);margin-top:4px}
+.card{background:var(--s2);border:1px solid var(--bdr);border-radius:var(--R);padding:18px;margin:0 16px 12px}
+.ctop{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+/* HERO */
+.hero{position:relative;overflow:hidden;height:200px;background:linear-gradient(160deg,#0d0620 0%,#160d35 50%,#0a1830 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 75% at 25% 50%,rgba(139,92,246,0.32),transparent 60%),radial-gradient(ellipse 45% 55% at 80% 25%,rgba(16,185,129,0.18),transparent 55%)}
+.hcity{position:absolute;bottom:0;left:0;right:0;height:90px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 430 90'%3E%3Cg fill='%23070712'%3E%3Crect x='0' y='45' width='28' height='45'/%3E%3Crect x='8' y='28' width='11' height='62'/%3E%3Crect x='32' y='36' width='24' height='54'/%3E%3Crect x='36' y='18' width='9' height='72'/%3E%3Crect x='60' y='15' width='33' height='75'/%3E%3Crect x='66' y='4' width='14' height='86'/%3E%3Crect x='98' y='42' width='18' height='48'/%3E%3Crect x='120' y='12' width='38' height='78'/%3E%3Crect x='128' y='2' width='17' height='88'/%3E%3Crect x='163' y='32' width='26' height='58'/%3E%3Crect x='194' y='10' width='34' height='80'/%3E%3Crect x='200' y='0' width='15' height='90'/%3E%3Crect x='234' y='36' width='20' height='54'/%3E%3Crect x='259' y='22' width='36' height='68'/%3E%3Crect x='266' y='8' width='13' height='82'/%3E%3Crect x='300' y='40' width='23' height='50'/%3E%3Crect x='328' y='18' width='28' height='72'/%3E%3Crect x='333' y='5' width='11' height='85'/%3E%3Crect x='362' y='44' width='19' height='46'/%3E%3Crect x='386' y='24' width='26' height='66'/%3E%3Crect x='410' y='48' width='20' height='42'/%3E%3C/g%3E%3C/svg%3E") bottom/cover no-repeat}
+.hcontent{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:18px 20px 58px}
+.hgr{font-size:12px;color:rgba(255,255,255,0.5);font-weight:500}
+.hnm{font-size:38px;font-weight:900;color:white;letter-spacing:-.5px;line-height:1;margin-top:2px}
+.hsb{font-size:11px;color:rgba(255,255,255,0.4);margin-top:5px}
+.hbdg{position:absolute;top:14px;right:14px;background:rgba(139,92,246,0.28);backdrop-filter:blur(10px);border:1px solid rgba(196,181,253,0.3);color:var(--v3);font-size:11px;font-weight:700;padding:6px 13px;border-radius:100px;letter-spacing:.5px}
+.hdate{position:absolute;top:14px;left:14px;font-size:11px;color:rgba(255,255,255,0.3);font-weight:600}
+/* SCORES */
+.srow{display:flex;gap:10px;margin:14px 16px 12px}
+.spill{flex:1;background:var(--s2);border:1px solid var(--bdr);border-radius:16px;padding:14px 8px;text-align:center;position:relative;overflow:hidden}
+.spill::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.spill.a::before{background:linear-gradient(90deg,var(--v),var(--v3))}.spill.b::before{background:linear-gradient(90deg,var(--gold),var(--o))}.spill.c::before{background:linear-gradient(90deg,var(--g),var(--b))}
+.sn{font-size:30px;font-weight:900;line-height:1;letter-spacing:-1px}
+.spill.a .sn{color:var(--v3)}.spill.b .sn{color:var(--gold)}.spill.c .sn{color:var(--g2)}
+.sl{font-size:10px;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+/* STREAK */
+.strk{margin:0 16px 12px;border-radius:var(--R);padding:16px 18px;display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(234,179,8,0.12),rgba(249,115,22,0.06));border:1px solid rgba(234,179,8,0.2)}
+.sfire{font-size:35px;filter:drop-shadow(0 0 10px rgba(234,179,8,.55))}
+.sh{font-size:16px;font-weight:800;color:var(--gold)}
+.ss{font-size:12px;color:var(--t2);margin-top:3px}
+/* CHART */
+.chartcard{margin:0 16px 12px;background:var(--s2);border:1px solid var(--bdr);border-radius:var(--R);padding:18px;overflow:hidden}
+#chart{width:100%;height:140px;display:block}
+.cleg{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
+.cli{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--t3);font-weight:600}
+.cld{width:8px;height:8px;border-radius:3px}
+/* TODAY */
+.todaywrap{margin:0 16px 12px;border-radius:var(--R);overflow:hidden}
+.todayhdr{padding:16px 18px 12px;background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(167,139,250,0.08));border:1px solid rgba(139,92,246,0.22);border-bottom:none;border-radius:var(--R) var(--R) 0 0}
+.todaytag{font-size:10px;font-weight:700;color:var(--v3);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.todayttl{font-size:18px;font-weight:800}
+.todaybody{background:var(--s2);border:1px solid rgba(139,92,246,0.18);border-top:none;border-radius:0 0 var(--R) var(--R);padding:8px 10px 10px}
+.ttask{display:flex;align-items:center;gap:10px;padding:10px;border-radius:11px;cursor:pointer;transition:all .2s;border:1px solid transparent;margin-bottom:5px}
+.ttask:last-child{margin-bottom:0}
+.ttask.done{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.2)}
+.ttask:active{transform:scale(.98)}
+.tchk{width:22px;height:22px;border-radius:50%;border:2px solid var(--t4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:transparent;flex-shrink:0;transition:all .3s cubic-bezier(.34,1.56,.64,1)}
+.ttask.done .tchk{background:var(--g);border-color:var(--g);color:#070712}
+.ttxt{font-size:13px;font-weight:500;flex:1;line-height:1.3}
+.ttask.done .ttxt{color:var(--t3);text-decoration:line-through;text-decoration-color:rgba(96,96,128,.4)}
+/* SCHEDULE */
+.wknav{display:flex;align-items:center;gap:10px;margin:0 16px 12px;background:var(--s2);border:1px solid var(--bdr);border-radius:var(--Rs);padding:11px 13px}
+.nbtn{width:40px;height:40px;border-radius:12px;background:var(--s3);border:1px solid var(--bdr2);color:var(--t1);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:inherit}
+.nbtn:active{background:var(--v);border-color:var(--v);transform:scale(.92)}
+.wkinfo{flex:1;text-align:center}
+.wkn{font-size:17px;font-weight:800}
+.wkm{font-size:12px;color:var(--t2);margin-top:2px}
+.tind{margin:0 16px 12px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);border-radius:var(--Rs);padding:10px 14px;font-size:12px;color:var(--g2);font-weight:600;display:flex;align-items:center;gap:8px}
+.motbox{margin:0 16px 12px;background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(59,130,246,0.05));border:1px solid rgba(139,92,246,0.18);border-radius:var(--Rs);padding:14px 16px}
+.motbox p{font-size:13px;line-height:1.7;color:var(--t2);font-style:italic}
+.dlist{display:flex;flex-direction:column;gap:9px;margin:0 16px 12px}
+.drow{background:var(--s2);border:1px solid var(--bdr);border-radius:var(--Rs);padding:13px 14px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.drow::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.drow[data-d="0"]::before{background:var(--v)}.drow[data-d="1"]::before{background:var(--r)}.drow[data-d="2"]::before{background:var(--g)}.drow[data-d="3"]::before{background:var(--o)}.drow[data-d="4"]::before{background:#a855f7}.drow[data-d="5"]::before{background:var(--gold)}.drow[data-d="6"]::before{background:var(--b)}
+.drow.done{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2)}
+.drow.today-row{border-color:rgba(139,92,246,0.4);box-shadow:0 0 0 1px rgba(139,92,246,0.15)}
+.drow:active{transform:scale(.99)}
+.dem{font-size:20px;flex-shrink:0}
+.dbody{flex:1;min-width:0}
+.dn{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
+.dt{font-size:11px;color:var(--t3);margin-top:1px}
+.dchips{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.chip{font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;border:1px solid;letter-spacing:.2px}
+.chip.v{background:rgba(139,92,246,.13);border-color:rgba(196,181,253,.25);color:var(--v3)}
+.chip.g{background:rgba(16,185,129,.1);border-color:rgba(52,211,153,.25);color:var(--g2)}
+.chip.o{background:rgba(249,115,22,.1);border-color:rgba(249,115,22,.25);color:var(--o)}
+.chip.r{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.25);color:var(--r)}
+.chip.gold{background:rgba(234,179,8,.1);border-color:rgba(234,179,8,.25);color:var(--gold)}
+.chip.b{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.25);color:var(--b)}
+.chip.p{background:rgba(236,72,153,.1);border-color:rgba(236,72,153,.25);color:var(--p)}
+.dchk{width:28px;height:28px;border-radius:50%;border:2px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:transparent;flex-shrink:0;transition:all .3s cubic-bezier(.34,1.56,.64,1)}
+.drow.done .dchk{background:var(--g);border-color:var(--g);color:#070712}
+.today-badge{font-size:9px;font-weight:700;background:var(--v);color:white;padding:2px 7px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase}
+.valsec{margin:0 16px 12px}
+.vallbl{font-size:12px;color:var(--t2);font-weight:600;margin-bottom:9px}
+.pbwrap{background:var(--s3);border-radius:100px;height:6px;margin-bottom:13px;overflow:hidden}
+.pbfill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--v),var(--g));transition:width .5s cubic-bezier(.34,1.56,.64,1)}
+.valbtn{width:100%;padding:16px;background:linear-gradient(135deg,var(--v),#7c3aed);border:none;border-radius:var(--Rs);color:white;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;transition:all .25s;letter-spacing:.2px;box-shadow:0 4px 20px var(--vg)}
+.valbtn:active{transform:scale(.97)}
+.valbtn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;transform:none}
+.valbtn.done{background:linear-gradient(135deg,var(--g),#059669);box-shadow:0 4px 20px var(--gg);color:#070712}
+/* INSTRUCTIONS */
+.ins-hero{margin:0 16px 12px;border-radius:var(--R);padding:20px;background:linear-gradient(135deg,rgba(139,92,246,0.18),rgba(59,130,246,0.08));border:1px solid rgba(139,92,246,0.25)}
+.ins-hero h2{font-size:20px;font-weight:800}
+.ins-hero p{font-size:13px;color:var(--t2);margin-top:6px;line-height:1.55}
+.ins-card{margin:0 16px 12px;background:var(--s2);border:1px solid var(--bdr);border-radius:var(--R);overflow:hidden}
+.ins-row{padding:16px 18px;border-bottom:1px solid var(--bdr);cursor:pointer}
+.ins-row:last-child{border-bottom:none}
+.ins-header{display:flex;align-items:center;gap:12px}
+.ins-icon{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ins-hbody{flex:1}
+.ins-title{font-size:14px;font-weight:700}
+.ins-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.ins-chevron{font-size:18px;color:var(--t4);transition:transform .25s}
+.ins-row.open .ins-chevron{transform:rotate(90deg)}
+.ins-content{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.ins-row.open .ins-content{max-height:700px}
+.ins-body{padding:14px 0 4px}
+.ins-step{display:flex;gap:12px;margin-bottom:12px}
+.ins-step:last-child{margin-bottom:0}
+.ins-num{width:24px;height:24px;border-radius:50%;background:rgba(139,92,246,0.2);border:1px solid rgba(139,92,246,0.3);color:var(--v3);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ins-text{font-size:13px;line-height:1.65;color:var(--t2)}
+.ins-text strong{color:var(--t1);font-weight:600}
+.ins-tip{margin-top:10px;background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.2);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--gold);line-height:1.55}
+/* NOTIFS */
+.nhero{margin:0 16px 12px;border-radius:var(--R);position:relative;background:linear-gradient(160deg,#180a2e,#0e1830);border:1px solid rgba(139,92,246,.25);min-height:140px;display:flex;align-items:center;padding:22px;gap:18px;overflow:hidden}
+.nhero::before{content:'';position:absolute;top:-30px;right:-30px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.28),transparent 60%)}
+.nhico{font-size:48px;filter:drop-shadow(0 0 16px rgba(234,179,8,.5));position:relative;z-index:1;flex-shrink:0}
+.nhtxt{position:relative;z-index:1}
+.nhtxt h2{font-size:20px;font-weight:800}
+.nhtxt p{font-size:12px;color:var(--t2);margin-top:6px;line-height:1.5}
+.ncard{margin:0 16px 12px;background:var(--s2);border:1px solid var(--bdr);border-radius:var(--R);overflow:hidden}
+.nrow{display:flex;align-items:center;gap:12px;padding:15px 17px;border-bottom:1px solid var(--bdr)}
+.nrow:last-child{border-bottom:none}
+.nico{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.nbody{flex:1}
+.ntitle{font-size:14px;font-weight:700}
+.nsub{font-size:11px;color:var(--t3);margin-top:2px}
+.tinput{background:var(--s3);border:1px solid var(--bdr2);border-radius:10px;color:var(--t1);font-family:inherit;font-size:15px;font-weight:700;padding:8px 10px;width:88px;outline:none;text-align:center}
+.tinput:focus{border-color:var(--v)}
+.togwrap{display:flex;align-items:center;gap:8px}
+.tog{width:50px;height:28px;background:var(--s4);border:1px solid var(--bdr2);border-radius:100px;cursor:pointer;position:relative;transition:background .25s;flex-shrink:0}
+.tog.on{background:var(--v);border-color:var(--v)}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:white;transition:transform .25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 5px rgba(0,0,0,.3)}
+.tog.on::after{transform:translateX(22px)}
+.prevbox{margin:0 16px 12px;background:var(--s1);border:1px solid var(--bdr);border-radius:var(--R);padding:16px}
+.prevlbl{font-size:10px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px}
+.iosn{background:rgba(255,255,255,0.06);border-radius:15px;padding:13px 14px;display:flex;gap:11px}
+.iosnico{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--v),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.iosapp{font-size:10px;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.iostitle{font-size:13px;font-weight:700;margin-top:2px}
+.iosmsg{font-size:12px;color:var(--t2);margin-top:3px;line-height:1.4}
+.savebtn{display:block;margin:0 16px 12px;width:calc(100% - 32px);padding:16px;background:linear-gradient(135deg,var(--gold),var(--o));border:none;border-radius:var(--Rs);color:#070712;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(234,179,8,.28)}
+.savebtn:active{transform:scale(.97)}
+.tipbox{margin:0 16px 12px;background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);border-radius:var(--Rs);padding:14px 16px}
+.tipbox p{font-size:12px;color:var(--t2);line-height:1.6}
+.tipbox strong{color:var(--g2)}
+/* PROFILE */
+.profhero{position:relative;height:185px;overflow:hidden;background:linear-gradient(160deg,#110722,#091830,#07120a)}
+.profhero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 90% at 50% 60%,rgba(139,92,246,.3),transparent 60%)}
+.profctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:10px}
+.avt{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--v),#c084fc);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:11px;box-shadow:0 0 0 3px rgba(139,92,246,.28),0 6px 28px rgba(139,92,246,.4)}
+.pname{font-size:24px;font-weight:900}
+.psub{font-size:12px;color:var(--t2);margin-top:3px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 16px 12px}
+.sbox{background:var(--s2);border:1px solid var(--bdr);border-radius:var(--Rs);padding:14px}
+.sv{font-size:28px;font-weight:900;line-height:1;letter-spacing:-.5px}
+.sl2{font-size:10px;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.mbars{margin:0 16px 12px;background:var(--s2);border:1px solid var(--bdr);border-radius:var(--R);padding:17px}
+.mrow{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+.mrow:last-child{margin-bottom:0}
+.mname{font-size:11px;font-weight:700;color:var(--t3);width:50px;flex-shrink:0}
+.mbarwrap{flex:1;background:var(--s3);border-radius:100px;height:7px;overflow:hidden}
+.mbar{height:100%;border-radius:100px;transition:width .8s cubic-bezier(.34,1.56,.64,1)}
+.mpct{font-size:11px;font-weight:700;color:var(--t3);width:28px;text-align:right;flex-shrink:0}
+.bdgwrap{margin:0 16px 12px}
+.bdggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.bdg{background:var(--s2);border:1px solid var(--bdr);border-radius:var(--Rs);padding:16px 8px;text-align:center}
+.bdg.earned{background:rgba(139,92,246,.12);border-color:rgba(196,181,253,.25)}
+.bde{font-size:28px}
+.bdn{font-size:10px;font-weight:700;color:var(--t4);margin-top:7px;text-transform:uppercase;letter-spacing:.3px}
+.bdg.earned .bdn{color:var(--v3)}
+.toast{position:fixed;bottom:calc(var(--tab) + var(--safe) + 14px);left:50%;transform:translateX(-50%) translateY(120px);background:var(--s2);border:1px solid rgba(16,185,129,.35);color:var(--g2);padding:12px 22px;border-radius:100px;font-size:13px;font-weight:700;z-index:999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:0 6px 28px rgba(0,0,0,.6);pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div id="app">
+<!-- HOME -->
+<div class="pg on" id="pg-home">
+  <div class="hero">
+    <div class="hcity"></div>
+    <div class="hcontent">
+      <div class="hgr" id="hGr">Bonsoir 👋</div>
+      <div class="hnm">Abdou</div>
+      <div class="hsb" id="hSb">Nashville, Tennessee</div>
+    </div>
+    <div class="hdate" id="hDate"></div>
+    <div class="hbdg" id="hBdg">Mois 1</div>
+  </div>
+  <div class="srow">
+    <div class="spill a"><div class="sn" id="h-d">0</div><div class="sl">Jours</div></div>
+    <div class="spill b"><div class="sn" id="h-str">0</div><div class="sl">Streak 🔥</div></div>
+    <div class="spill c"><div class="sn" id="h-w">0</div><div class="sl">Semaines</div></div>
+  </div>
+  <div class="strk"><div class="sfire">🔥</div><div><div class="sh" id="hST">Commence aujourd'hui !</div><div class="ss" id="hSS">Chaque semaine validée fait monter ta courbe</div></div></div>
+  <div class="chartcard">
+    <div class="ctop"><span>📈</span>Ta progression sur 6 mois</div>
+    <canvas id="chart"></canvas>
+    <div class="cleg">
+      <div class="cli"><div class="cld" style="background:var(--g2)"></div>Validée</div>
+      <div class="cli"><div class="cld" style="background:var(--o)"></div>Partielle</div>
+      <div class="cli"><div class="cld" style="background:var(--s4)"></div>À venir</div>
+    </div>
+  </div>
+  <div class="todaywrap">
+    <div class="todayhdr"><div class="todaytag" id="todayTag">Aujourd'hui</div><div class="todayttl" id="todayTtl">Tes tâches du jour</div></div>
+    <div class="todaybody" id="todayTasks"></div>
+  </div>
+</div>
+<!-- SCHEDULE -->
+<div class="pg" id="pg-schedule">
+  <div class="phead"><div class="ptag">📋 Planning</div><h1>Mon Emploi<br>du Temps</h1><p>Coche chaque jour accompli</p></div>
+  <div class="wknav"><button class="nbtn" onclick="chgW(-1)">‹</button><div class="wkinfo"><div class="wkn" id="wkN">Semaine 1</div><div class="wkm" id="wkM">Mois 1</div></div><button class="nbtn" onclick="chgW(1)">›</button></div>
+  <div class="tind" id="tind" style="display:none">📍 Semaine actuelle — tu es ici</div>
+  <div class="motbox"><p id="motiv"></p></div>
+  <div class="dlist" id="dlist"></div>
+  <div class="valsec">
+    <div class="vallbl" id="valLbl">0/7 jours cochés</div>
+    <div class="pbwrap"><div class="pbfill" id="pbar" style="width:0%"></div></div>
+    <button class="valbtn" id="valBtn" onclick="valW()">Valider la semaine</button>
+  </div>
+</div>
+<!-- INSTRUCTIONS -->
+<div class="pg" id="pg-ins">
+  <div class="phead"><div class="ptag">📖 Guides</div><h1>Comment faire<br>chaque tâche</h1><p>Clique pour voir les instructions</p></div>
+  <div class="ins-hero"><h2>🎯 Ton guide pratique</h2><p>Clique sur chaque activité pour voir les instructions complètes étape par étape.</p></div>
+  <div class="ins-card" id="insCard"></div>
+</div>
+<!-- NOTIFS -->
+<div class="pg" id="pg-notif">
+  <div class="phead"><div class="ptag">🔔 Rappels</div><h1>Mes Rappels</h1><p>Configure tes alertes quotidiennes</p></div>
+  <div class="nhero"><div class="nhico">⏰</div><div class="nhtxt"><h2>Rappels intelligents</h2><p>L'app te notifie si tu n'as pas validé ta journée à l'heure choisie.</p></div></div>
+  <div class="ncard">
+    <div class="nrow"><div class="nico" style="background:rgba(139,92,246,.15)">🌅</div><div class="nbody"><div class="ntitle">Matin</div><div class="nsub">Avant l'école</div></div><div class="togwrap"><input type="time" class="tinput" id="tMorn" value="06:30"><div class="tog on" id="togMorn" onclick="togN('morn')"></div></div></div>
+    <div class="nrow"><div class="nico" style="background:rgba(16,185,129,.12)">🏠</div><div class="nbody"><div class="ntitle">Après-midi</div><div class="nsub">Retour maison</div></div><div class="togwrap"><input type="time" class="tinput" id="tAfter" value="14:30"><div class="tog on" id="togAfter" onclick="togN('after')"></div></div></div>
+    <div class="nrow"><div class="nico" style="background:rgba(234,179,8,.12)">🌙</div><div class="nbody"><div class="ntitle">Soir</div><div class="nsub">Si journée pas validée</div></div><div class="togwrap"><input type="time" class="tinput" id="tEven" value="22:00"><div class="tog on" id="togEven" onclick="togN('even')"></div></div></div>
+  </div>
+  <div class="prevbox"><div class="prevlbl">Aperçu notification</div><div class="iosn"><div class="iosnico">📚</div><div><div class="iosapp">Abdou English</div><div class="iostitle">⚠️ Tu n'as pas validé ta journée</div><div class="iosmsg" id="prevMsg">22h00 — Juste 20 min Abdou. 💪</div></div></div></div>
+  <button class="savebtn" onclick="saveN()">💾 Activer les rappels</button>
+  <div class="tipbox"><p>📱 <strong>Installer comme app sur iPhone :</strong><br>1. Ouvre dans <strong>Safari</strong><br>2. Bouton partage ↑ en bas<br>3. <strong>"Sur l'écran d'accueil"</strong><br>4. Nom : <strong>Abdou English</strong> → Ajouter<br>Tu l'ouvriras directement sans Claude.</p></div>
+  <div class="tipbox" style="margin-top:0"><p>🔒 <strong>Bloquer Instagram :</strong> Réglages → Temps d'écran → Limites d'apps. Mets un code que tu ne connais pas.</p></div>
+</div>
+<!-- PROFILE -->
+<div class="pg" id="pg-profile">
+  <div class="profhero"><div class="profctr"><div class="avt">🎓</div><div class="pname">Abdou</div><div class="psub">Cane Ridge High School · Nashville 🇺🇸</div></div></div>
+  <div class="sgrid">
+    <div class="sbox"><div class="sv" style="color:var(--v3)" id="p-d">0</div><div class="sl2">Jours validés</div></div>
+    <div class="sbox"><div class="sv" style="color:var(--gold)" id="p-s">0</div><div class="sl2">Streak 🔥</div></div>
+    <div class="sbox"><div class="sv" style="color:var(--g2)" id="p-w">0</div><div class="sl2">Semaines complètes</div></div>
+    <div class="sbox"><div class="sv" style="color:var(--b)" id="p-p">0%</div><div class="sl2">Complétion totale</div></div>
+  </div>
+  <div class="mbars"><div class="ctop"><span>📊</span>Progression par mois</div><div id="mBars"></div></div>
+  <div class="bdgwrap"><div class="ctop" style="margin-bottom:12px"><span>🏅</span>Badges</div><div class="bdggrid" id="bdgGrid"></div></div>
+</div>
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab on" onclick="goTab('home')" id="t-home"><div class="ti">🏠</div><div class="tl">Accueil</div></div>
+  <div class="tab" onclick="goTab('schedule')" id="t-schedule"><div class="ti">📋</div><div class="tl">Planning</div></div>
+  <div class="tab" onclick="goTab('ins')" id="t-ins"><div class="ti">📖</div><div class="tl">Guides</div></div>
+  <div class="tab" onclick="goTab('notif')" id="t-notif"><div class="ti">🔔</div><div class="tl">Rappels</div></div>
+  <div class="tab" onclick="goTab('profile')" id="t-profile"><div class="ti">👤</div><div class="tl">Profil</div></div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const MI=[{l:"Mois 1",t:"Construire ton oreille"},{l:"Mois 2",t:"Intensifier et ancrer"},{l:"Mois 3",t:"Penser en anglais"},{l:"Mois 4",t:"Vaincre la peur de parler"},{l:"Mois 5",t:"Conversations réelles"},{l:"Mois 6",t:"Solidifier et maintenir"}];
+const MOT=["La première semaine commence. Juste une chose : commence. Peu importe l'heure.","Semaine 2. Tu reviens — c'est déjà 90% du travail.","Semaine 3. Ton cerveau crée des connexions. Continue.","1 mois terminé. Tu as tenu. C'est énorme.","Semaine 5. Tu es régulier — la qualité la plus rare.","Semaine 6. Tu comprends plus qu'il y a 6 semaines. Tu le sens ?","Semaine 7. Utilise ces mots dans de vraies conversations.","2 mois ! Tu es sérieux. Ça se voit dans ton niveau.","Semaine 9. Commence à penser en anglais — une phrase par heure.","Semaine 10. Tu arrives à mi-parcours. Le plus dur est derrière toi.","Semaine 11. Revois les bases. Be, have, do, go — partout.","3 mois ! La moitié du chemin. Tu parles mieux qu'il y a 3 mois.","Semaine 13. Les conversations arrivent. Inconfortable — c'est normal.","Semaine 14. Chaque phrase imparfaite vaut mille silences parfaits.","Semaine 15. Utilise les verbes dans des phrases longues.","4 mois ! Tu es à mi-parcours du livre. Félicitations Abdou.","Semaine 17. Ton anglais devient naturel. Continue.","Semaine 18. Teste-toi sur les irréguliers sans regarder.","Semaine 19. Presque là. Encore quelques semaines.","5 mois ! 5 mois de travail régulier. Vraie discipline.","Semaine 21. Consolide. Reviens sur les bases.","Semaine 22. Reviens sur les verbes que tu oublies encore.","Semaine 23. Tous les temps en révision. Tu vois tes progrès ?","SEMAINE 24 — FINALE. Sénégal → Nashville → Bilingue. 🎓"];
+const MC=["#8b5cf6","#ef4444","#f97316","#10b981","#3b82f6","#c084fc"];
+const BDGS=[{e:"🌱",n:"Premier jour",ok:s=>s.d>=1},{e:"🔥",n:"1 semaine",ok:s=>s.w>=1},{e:"💪",n:"1 mois",ok:s=>s.w>=4},{e:"⚡",n:"Streak x4",ok:s=>s.str>=4},{e:"🎯",n:"Mi-parcours",ok:s=>s.w>=12},{e:"🏆",n:"6 mois !",ok:s=>s.w>=24}];
+const INS=[
+  {icon:"🎧",bg:"rgba(139,92,246,.15)",title:"Écoute active",sub:"20 min — YouTube lent et clair",steps:["Ouvre YouTube et cherche la chaîne indiquée (ex: 'English with Jennifer beginners').","Choisis une vidéo courte de 5 à 10 minutes maximum.","Écoute une première fois en essayant de comprendre le sens général.","Réécoute avec les sous-titres EN activés (jamais français).","Note 3 à 5 mots que tu n'as pas compris. Cherche-les après."],tip:"💡 Règle : si tu comprends moins de 60%, c'est trop difficile. Change pour une vidéo plus simple. Ce n'est pas de la faiblesse, c'est de la stratégie."},
+  {icon:"🔁",bg:"rgba(59,130,246,.15)",title:"Shadowing",sub:"20 min — La technique numéro 1",steps:["Choisis une vidéo courte (1 à 2 minutes max).","Écoute une seule phrase. Appuie sur pause.","Répète à voix haute — exactement comme tu l'as entendu. Même rythme, même accent, même mélodie.","Réécoute la même phrase. Compare. Recommence si besoin.","Phrase suivante. 20 phrases en 20 minutes, c'est parfait."],tip:"💡 Pendant le shadowing tu n'analyses pas le sens. Tu imites comme un perroquet. Ton cerveau enregistre les sons d'abord. Le sens vient automatiquement après."},
+  {icon:"📺",bg:"rgba(16,185,129,.15)",title:"Séries EN",sub:"30 min — Sous-titres anglais uniquement",steps:["Ouvre Netflix ou YouTube.","Sélectionne la série du mois (Peppa Pig mois 1, Friends mois 2...).","Active les sous-titres en ANGLAIS. Jamais en français. Règle absolue.","Regarde normalement. Pause si tu ne comprends pas, lis les sous-titres, continue.","Note 3 expressions utiles à réutiliser."],tip:"💡 Si une scène est trop rapide, reviens 10 secondes et regarde à nouveau. 70% de compréhension suffit pour progresser."},
+  {icon:"🃏",bg:"rgba(239,68,68,.15)",title:"Anki — Cartes mémoire",sub:"20 min — 20 cartes par jour",steps:["Télécharge Anki (gratuit Android) ou AnkiWeb.net sur navigateur.","Cherche le deck 'English 3000 Most Common Words with Images'.","Chaque jour : exactement 20 nouvelles cartes. Pas plus, pas moins.","Pour chaque carte : regarde l'image, pense au mot anglais AVANT de retourner.","Bonne réponse → 'Facile'. Hésitation → 'Bien'. Oublié → 'À revoir'."],tip:"💡 20 cartes par jour pendant 6 mois = 3600 mots mémorisés. C'est la quasi-totalité du vocabulaire quotidien américain."},
+  {icon:"🗣️",bg:"rgba(249,115,22,.15)",title:"Monologue intérieur",sub:"15 min — Penser en anglais",steps:["Au réveil, force-toi à penser en anglais ce que tu fais.","Commence simple : 'I wake up. I am tired. I want to eat.'","Dans la journée, dis le nom des objets en anglais dans ta tête.","Le soir, raconte ta journée en anglais à voix haute dans ta chambre.","Ne te bats pas contre la traduction — avec le temps, elle disparaît."],tip:"💡 Tu n'as pas besoin que ce soit parfait. Une phrase incorrecte en anglais que tu prononces vaut mieux que dix phrases parfaites dans ta tête."},
+  {icon:"🏋️",bg:"rgba(16,185,129,.18)",title:"Salle de sport",sub:"1h — Chaque jour si possible",steps:["Prévois ta séance avant ou après tes sessions d'anglais.","Pendant l'échauffement (15 min) : écoute ton podcast anglais. Double utilité.","Pendant les exercices : concentre-toi sur l'effort physique.","Pendant le cardio : écoute une série ou podcast EN sans effort conscient.","Après la séance : fais Anki immédiatement — le cerveau retient mieux après le sport."],tip:"💡 Après une séance de sport, ton cerveau retient 20% mieux les nouvelles informations. C'est scientifiquement prouvé. Planifie Anki juste après le sport."},
+  {icon:"💬",bg:"rgba(236,72,153,.15)",title:"HelloTalk / Speaky",sub:"20-30 min — Parler à des natifs",steps:["Télécharge HelloTalk (gratuit) ou va sur Speaky.com.","Crée un profil. Mets : Je parle français, j'apprends l'anglais.","Cherche des Américains qui apprennent le français.","Commence par des messages écrits, puis essaie les messages vocaux.","30 min : 15 min en anglais, 15 min en français."],tip:"💡 Tu as un avantage : les Américains adorent apprendre le français. Tu n'es pas en position de faiblesse — tu as quelque chose à offrir. C'est un échange égal."},
+  {icon:"📖",bg:"rgba(234,179,8,.15)",title:"Verbes du dimanche",sub:"30 min — Livre des verbes",steps:["Ouvre ton livre des verbes sur le chapitre de la semaine.","Lis les 5 verbes : base, passé, participe passé.","Dis chaque verbe à voix haute 3 fois avec une phrase exemple.","Fais les exercices SANS regarder la liste. Bloque-toi 30 secondes avant de regarder.","Le lundi matin, écris les 5 verbes de mémoire sur une feuille."],tip:"💡 Utilise ces verbes dans de vraies phrases le lendemain. 'Yesterday I went to school' — l'utiliser dans la réalité fixe le verbe pour toujours."},
+  {icon:"📗",bg:"rgba(59,130,246,.15)",title:"Grammar in Use",sub:"30 min — Le mercredi uniquement",steps:["Ouvre Essential Grammar in Use (Murphy) récupéré à la bibliothèque.","Choisis l'unité correspondant au temps que tu travailles.","Lis la page gauche : explication de la règle (5 minutes).","Fais tous les exercices page droite sans regarder les réponses.","Vérifie à la fin du livre. Note tes erreurs et relis la règle."],tip:"💡 Une unité par mercredi = 30 minutes. Pas plus. La régularité hebdomadaire vaut mieux qu'une grosse session mensuelle."},
+];
+function getSched(wn){
+  const m=Math.floor((wn-1)/4);
+  const P=[[
+    {n:"Lundi",e:"📱",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🎧 Écoute active 20min",c:"v"},{l:"🔁 Shadowing 20min",c:"b"},{l:"📺 Peppa Pig EN 30min",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mardi",e:"🎙️",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🎧 VOA Learning 20min",c:"v"},{l:"🔁 Shadowing reprise",c:"b"},{l:"🎵 ESLPod Spotify",c:"o"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mercredi",e:"📚",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🔄 Révision lundi 20min",c:"gold"},{l:"📗 Grammar in Use 30min",c:"b"},{l:"📺 Série EN",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Jeudi",e:"🎧",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 Ronnie EngVid 20min",c:"v"},{l:"🔁 Shadowing Ronnie",c:"b"},{l:"🎵 Culips ESL 30min",c:"o"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Vendredi",e:"🏆",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🎧 VOA Learning 20min",c:"v"},{l:"🔁 Shadowing libre",c:"b"},{l:"📺 Peppa SANS sous-titres",c:"r"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Samedi",e:"🌊",t:"Journée disponible · Salle",ch:[{l:"🌊 Immersion 2h",c:"gold"},{l:"🎵 Musique EN",c:"o"},{l:"📺 YouTube EN",c:"b"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Dimanche",e:"📖",t:"Matin calme — Repos sport",ch:[{l:"📖 5 verbes irréguliers",c:"r"},{l:"🔄 Révision semaine",c:"gold"},{l:"😴 Repos / récupération",c:"g"}]},
+  ],[
+    {n:"Lundi",e:"📱",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 Vanessa/Rachel 20min",c:"v"},{l:"🃏 Anki 20 cartes",c:"r"},{l:"📺 Friends S1 EN",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mardi",e:"🎙️",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🎵 6min English BBC",c:"o"},{l:"🃏 Anki + shadowing",c:"r"},{l:"📺 Friends S1E2",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mercredi",e:"📚",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🔄 Révision 20min",c:"gold"},{l:"📗 Grammar in Use 30min",c:"b"},{l:"🃏 Anki révision",c:"r"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Jeudi",e:"🎧",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 Rachel's English sons",c:"v"},{l:"🔁 Shadowing Friends",c:"b"},{l:"📺 Modern Family",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Vendredi",e:"🏆",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 TED-Ed sous-titres EN",c:"v"},{l:"🔁 Shadowing TED-Ed",c:"b"},{l:"📺 Friends/Modern Family",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Samedi",e:"🌊",t:"Journée · Salle",ch:[{l:"🌊 Immersion 2h",c:"gold"},{l:"📺 Films EN",c:"g"},{l:"🎵 Musique EN",c:"o"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Dimanche",e:"📖",t:"Matin calme — Repos sport",ch:[{l:"📖 5 verbes irréguliers",c:"r"},{l:"🃏 Anki rattrapage",c:"r"},{l:"😴 Repos",c:"g"}]},
+  ],[
+    {n:"Lundi",e:"🧠",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🗣️ Monologue intérieur 20min",c:"o"},{l:"🃏 Anki 20 cartes",c:"r"},{l:"📺 Friends S2",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mardi",e:"🎙️",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🎵 All Ears English",c:"o"},{l:"🃏 Anki + monologue",c:"r"},{l:"📝 5 expressions",c:"b"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mercredi",e:"📚",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🔄 Révision semaine",c:"gold"},{l:"📗 Grammar in Use 30min",c:"b"},{l:"🔁 Shadowing",c:"b"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Jeudi",e:"🏷️",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 Tiffani/Marvels EN",c:"v"},{l:"🏷️ Étiquetage mental",c:"o"},{l:"📺 Friends",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Vendredi",e:"🏆",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🎵 American English Pod",c:"o"},{l:"🔁 Shadowing + Anki",c:"b"},{l:"📺 Test sans pause",c:"r"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Samedi",e:"🌊",t:"Journée · Salle",ch:[{l:"🌊 Immersion 3h",c:"gold"},{l:"🎵 Rap/R&B EN",c:"o"},{l:"📺 Films US EN",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Dimanche",e:"📖",t:"Matin calme — Repos sport",ch:[{l:"📖 5 verbes irréguliers",c:"r"},{l:"🗣️ Monologue 10min",c:"o"},{l:"😴 Repos",c:"g"}]},
+  ],[
+    {n:"Lundi",e:"😤",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 Duncan/Gabby 20min",c:"v"},{l:"🗣️ Parler seul 5min",c:"o"},{l:"📺 Friends S3",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mardi",e:"📱",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🎵 Effortless English",c:"o"},{l:"💬 HelloTalk message",c:"r"},{l:"🎵 Real Life English",c:"o"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mercredi",e:"📚",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🔄 Révision + Anki",c:"gold"},{l:"📗 Grammar in Use 30min",c:"b"},{l:"🎤 Se filmer en anglais",c:"r"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Jeudi",e:"💬",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 Immersilearn 20min",c:"v"},{l:"💬 HelloTalk vocal",c:"r"},{l:"📺 Friends ou film",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Vendredi",e:"🏆",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 Go Natural English",c:"v"},{l:"🔁 Shadowing + monologue",c:"b"},{l:"📺 SANS sous-titres 10min",c:"r"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Samedi",e:"🌎",t:"Journée · Salle",ch:[{l:"🌊 Immersion 3h",c:"gold"},{l:"🛒 Parler à qqun EN",c:"r"},{l:"🏪 Fast food en anglais",c:"o"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Dimanche",e:"📖",t:"Matin calme — Repos sport",ch:[{l:"📖 5 verbes irréguliers",c:"r"},{l:"😴 Repos mérité",c:"g"},{l:"🎵 Série légère",c:"g"}]},
+  ],[
+    {n:"Lundi",e:"⚡",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 Rachel réductions",c:"v"},{l:"🔁 Shadowing réductions",c:"b"},{l:"🎵 This American Life",c:"o"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mardi",e:"🎯",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 YouTube natif 5min",c:"r"},{l:"💬 HelloTalk vocal",c:"r"},{l:"🎵 Serial Spotify",c:"o"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mercredi",e:"📚",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🔄 Révision + Anki",c:"gold"},{l:"📗 Grammar in Use 30min",c:"b"},{l:"🔁 Shadowing avancé",c:"b"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Jeudi",e:"🗣️",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🎵 Stuff You Should Know",c:"o"},{l:"💬 Parler à l'école EN",c:"r"},{l:"📺 Film américain EN",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Vendredi",e:"🏆",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 YouTube natif libre",c:"v"},{l:"🔁 Shadowing + monologue",c:"b"},{l:"📺 Série ou film EN",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Samedi",e:"🌍",t:"Journée · Salle",ch:[{l:"📱 Téléphone 100% EN",c:"r"},{l:"🌊 Mode natif",c:"gold"},{l:"🎵 Tout en anglais",c:"gold"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Dimanche",e:"📖",t:"Matin calme — Repos sport",ch:[{l:"📖 Révision verbes",c:"r"},{l:"🔄 Révision + Anki",c:"gold"},{l:"😴 Repos",c:"g"}]},
+  ],[
+    {n:"Lundi",e:"👑",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 YouTube intérêt perso",c:"v"},{l:"🗣️ Monologue avancé",c:"o"},{l:"🎵 The Daily NYT",c:"o"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mardi",e:"🤝",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🎵 Podcast intérêt perso",c:"o"},{l:"💬 Speaky partenaire",c:"r"},{l:"📺 Série EN",c:"g"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Mercredi",e:"📚",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"🔄 Révision + Anki",c:"gold"},{l:"📗 Grammar in Use 30min",c:"b"},{l:"🏫 Activité école EN",c:"r"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Jeudi",e:"🏫",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 YouTube natif",c:"v"},{l:"💬 Parler à l'école",c:"r"},{l:"🎵 Radiolab Spotify",c:"o"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Vendredi",e:"🏆",t:"6h30–8h · 14h30–16h · Salle",ch:[{l:"📺 YouTube natif",c:"v"},{l:"💬 Speaky ou HelloTalk",c:"r"},{l:"📺 SANS sous-titres (test)",c:"r"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Samedi",e:"🎓",t:"Journée · Salle",ch:[{l:"📱 Journée 100% anglais",c:"gold"},{l:"🌊 Sorties EN",c:"gold"},{l:"🎵 Tout EN",c:"gold"},{l:"🏋️ Salle de sport",c:"p"}]},
+    {n:"Dimanche",e:"🎉",t:"Matin calme — Repos sport",ch:[{l:"📊 Bilan mensuel",c:"r"},{l:"🎊 Célèbre tes progrès",c:"gold"},{l:"😴 Repos mérité",c:"g"}]},
+  ]];
+  return P[m];
+}
+// STATE — with robust save/load
+let S={cw:1,wd:{},notifs:{morn:{on:true,t:"06:30"},after:{on:true,t:"14:30"},even:{on:true,t:"22:00"}},startDate:null};
+const KEY='abdou_v8';
+function ld(){
+  try{
+    const raw=localStorage.getItem(KEY);
+    if(raw){
+      const p=JSON.parse(raw);
+      if(p.cw) S.cw=p.cw;
+      if(p.wd) S.wd=p.wd;
+      if(p.notifs) S.notifs=p.notifs;
+      if(p.startDate) S.startDate=p.startDate;
+    }
+  }catch(e){}
+  if(!S.startDate){S.startDate=new Date().toISOString().split('T')[0];sv();}
+}
+function sv(){
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
+function gWD(w){
+  if(!S.wd[w]) S.wd[w]={d:[0,0,0,0,0,0,0],v:false};
+  return S.wd[w];
+}
+function autoWeek(){
+  try{
+    const start=new Date(S.startDate),now=new Date();
+    const diff=Math.floor((now-start)/(7*24*60*60*1000));
+    return Math.min(24,Math.max(1,diff+1));
+  }catch(e){return 1;}
+}
+function todayIdx(){const d=new Date().getDay();return d===0?6:d-1;}
+function stats(){
+  let d=0,w=0,str=0;
+  for(let i=1;i<=24;i++){const wd=S.wd[i];if(!wd)continue;d+=wd.d.filter(Boolean).length;if(wd.v)w++}
+  for(let i=S.cw-1;i>=1;i--){const wd=S.wd[i];if(wd&&wd.v)str++;else break}
+  const pct=S.cw>0?Math.min(100,Math.round(d/(S.cw*7)*100)):0;
+  return{d,w,str,pct};
+}
+function goTab(t){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
+  document.getElementById('t-'+t).classList.add('on');
+  document.getElementById('pg-'+t).classList.add('on');
+  if(t==='home')rHome();if(t==='schedule')rSched();if(t==='profile')rProf();if(t==='notif')rNotif();if(t==='ins')rIns();
+}
+function drawChart(){
+  const cv=document.getElementById('chart');if(!cv)return;
+  const ctx=cv.getContext('2d');const dpr=window.devicePixelRatio||1;
+  const W=cv.offsetWidth,H=140;cv.width=W*dpr;cv.height=H*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
+  const P={t:12,b:28,l:6,r:6},cW=W-P.l-P.r,cH=H-P.t-P.b,bW=cW/24,gap=2.5;
+  const scores=[];
+  for(let w=1;w<=24;w++){const d=S.wd[w];if(!d){scores.push(null);continue}const n=d.d.filter(Boolean).length;scores.push(d.v?100:Math.round(n/7*60));}
+  // Grid
+  ctx.strokeStyle='rgba(255,255,255,0.04)';ctx.lineWidth=1;
+  [.25,.5,.75,1].forEach(p=>{const y=P.t+cH*(1-p);ctx.beginPath();ctx.moveTo(P.l,y);ctx.lineTo(P.l+cW,y);ctx.stroke()});
+  // Month separators
+  ctx.setLineDash([2,4]);ctx.strokeStyle='rgba(255,255,255,0.05)';
+  for(let m=1;m<6;m++){const x=P.l+m*(cW/6);ctx.beginPath();ctx.moveTo(x,P.t);ctx.lineTo(x,P.t+cH);ctx.stroke();}
+  ctx.setLineDash([]);
+  // Bars
+  for(let i=0;i<24;i++){
+    const s=scores[i],x=P.l+i*bW,isCur=(i+1)===S.cw;
+    if(isCur){ctx.fillStyle='rgba(139,92,246,0.08)';ctx.fillRect(x,P.t,bW,cH);}
+    let col=isCur?'rgba(139,92,246,0.3)':'rgba(28,28,52,0.8)';
+    if(s!==null){if(s>=100)col='#10b981';else if(s>0)col='#f97316';else col='#ef4444';}
+    const bH=s!==null?Math.max(5,s/100*cH):5,y=P.t+cH-bH,r=Math.min(4,(bW-gap)*0.45);
+    ctx.beginPath();ctx.roundRect(x+gap/2,y,bW-gap,bH,[r,r,0,0]);ctx.fillStyle=col;ctx.fill();
+    // Glow on validated
+    if(s>=100){ctx.shadowColor='rgba(16,185,129,0.4)';ctx.shadowBlur=8;ctx.beginPath();ctx.roundRect(x+gap/2,y,bW-gap,bH,[r,r,0,0]);ctx.fillStyle='rgba(16,185,129,0.1)';ctx.fill();ctx.shadowBlur=0;}
+  }
+  // Trend line
+  const pts=[];
+  for(let i=0;i<24;i++){const s=scores[i];if(s!==null&&s>0)pts.push({x:P.l+i*bW+bW/2,y:P.t+cH-s/100*cH});}
+  if(pts.length>1){
+    ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);
+    for(let i=1;i<pts.length;i++){
+      if(i<pts.length-1){const cpx=(pts[i].x+pts[i+1].x)/2,cpy=(pts[i].y+pts[i+1].y)/2;ctx.quadraticCurveTo(pts[i].x,pts[i].y,cpx,cpy);}
+      else ctx.lineTo(pts[i].x,pts[i].y);
+    }
+    ctx.strokeStyle='rgba(139,92,246,0.85)';ctx.lineWidth=2;ctx.stroke();
+    pts.forEach(pt=>{ctx.beginPath();ctx.arc(pt.x,pt.y,2.5,0,Math.PI*2);ctx.fillStyle='#8b5cf6';ctx.fill();});
+  }
+  // Current week arrow
+  const cwX=P.l+(S.cw-1)*bW+bW/2;
+  ctx.fillStyle='rgba(196,181,253,0.8)';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.fillText('▼',cwX,P.t-1);
+  // Month labels
+  ctx.fillStyle='#363656';ctx.font='bold 9px sans-serif';ctx.textAlign='center';
+  for(let m=0;m<6;m++)ctx.fillText('M'+(m+1),P.l+m*(cW/6)+cW/12,H-8);
+}
+function rHome(){
+  const st=stats(),w=S.cw,m=Math.floor((w-1)/4),mi=MI[m],wd=gWD(w);
+  const now=new Date(),h=now.getHours();
+  const months=['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'];
+  const days=['dim','lun','mar','mer','jeu','ven','sam'];
+  document.getElementById('hGr').textContent=(h<6?'Bonne nuit':h<12?'Bonjour':h<18?'Bon après-midi':'Bonsoir')+' 👋';
+  document.getElementById('hSb').textContent='Semaine '+w+' · '+mi.t;
+  document.getElementById('hBdg').textContent=mi.l;
+  document.getElementById('hDate').textContent=days[now.getDay()]+' '+now.getDate()+' '+months[now.getMonth()];
+  document.getElementById('h-d').textContent=st.d;
+  document.getElementById('h-str').textContent=st.str;
+  document.getElementById('h-w').textContent=st.w;
+  if(st.str>=4){document.getElementById('hST').textContent=st.str+' semaines d\'affilée 🔥';document.getElementById('hSS').textContent='Tu es en feu. Ne brise pas la chaîne.';}
+  else if(st.str>=1){document.getElementById('hST').textContent=st.str+' semaine'+(st.str>1?'s':'')+' consécutive'+(st.str>1?'s':'');document.getElementById('hSS').textContent='Continue — la courbe monte.';}
+  else{document.getElementById('hST').textContent='Commence aujourd\'hui !';document.getElementById('hSS').textContent='Chaque semaine validée fait monter ta courbe';}
+  const di=todayIdx(),sched=getSched(w),td=sched[di];
+  const dnames=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+  document.getElementById('todayTag').textContent='Aujourd\'hui · '+dnames[di];
+  document.getElementById('todayTtl').textContent=td.e+' '+td.n;
+  document.getElementById('todayTasks').innerHTML=td.ch.map(ch=>`
+    <div class="ttask ${wd.d[di]?'done':''}" onclick="togToday(${di})">
+      <div class="tchk">✓</div><div class="ttxt">${ch.l}</div>
+    </div>`).join('');
+  drawChart();
+}
+function togToday(di){
+  const wd=gWD(S.cw);if(wd.v)return;
+  wd.d[di]=wd.d[di]?0:1;sv();rHome();
+  const sched=getSched(S.cw);
+  if(wd.d[di])toast('✓ '+sched[di].n+' validé !');
+}
+function chgW(d){const n=S.cw+d;if(n<1||n>24)return;S.cw=n;sv();rSched();}
+function togDay(di){
+  const wd=gWD(S.cw);if(wd.v)return;
+  wd.d[di]=wd.d[di]?0:1;sv();rSched();
+  const sched=getSched(S.cw);
+  if(wd.d[di])toast('✓ '+sched[di].n+' coché !');
+}
+function valW(){
+  const wd=gWD(S.cw),n=wd.d.filter(Boolean).length;
+  if(!n){toast('⚠️ Coche au moins un jour !');return;}
+  wd.v=true;sv();
+  toast(n===7?'🔥 Semaine PARFAITE !':'✅ Validée ! '+n+'/7 — continue !');
+  rSched();drawChart();
+}
+function rSched(){
+  const w=S.cw,m=Math.floor((w-1)/4),mi=MI[m],wd=gWD(w);
+  const n=wd.d.filter(Boolean).length,pct=Math.round(n/7*100);
+  const aw=autoWeek(),di=todayIdx();
+  document.getElementById('wkN').textContent='Semaine '+w;
+  document.getElementById('wkM').textContent=mi.l+' — '+mi.t;
+  document.getElementById('motiv').textContent=MOT[w-1];
+  document.getElementById('valLbl').textContent=n+'/7 jours cochés cette semaine';
+  document.getElementById('pbar').style.width=pct+'%';
+  const tind=document.getElementById('tind');
+  tind.style.display=w===aw?'flex':'none';
+  const btn=document.getElementById('valBtn');
+  if(wd.v){btn.textContent='✅ Semaine validée !';btn.className='valbtn done';btn.disabled=true;}
+  else{btn.textContent=n?'Valider ('+n+'/7 jours)':'Valider la semaine';btn.className='valbtn';btn.disabled=!n;}
+  const sched=getSched(w),isCurWeek=w===aw;
+  document.getElementById('dlist').innerHTML=sched.map((d,dI)=>{
+    const isToday=isCurWeek&&dI===di;
+    return`<div class="drow ${wd.d[dI]?'done':''} ${isToday?'today-row':''}" data-d="${dI}" onclick="togDay(${dI})">
+      <div class="dem">${d.e}</div>
+      <div class="dbody">
+        <div class="dn">${d.n}${isToday?' <span class="today-badge">Aujourd\'hui</span>':''}</div>
+        <div class="dt">⏰ ${d.t}</div>
+        <div class="dchips">${d.ch.map(c=>`<span class="chip ${c.c}">${c.l}</span>`).join('')}</div>
+      </div>
+      <div class="dchk">✓</div>
+    </div>`;
+  }).join('');
+}
+function rIns(){
+  document.getElementById('insCard').innerHTML=INS.map((ins,i)=>`
+    <div class="ins-row" id="ir${i}" onclick="togIns(${i})">
+      <div class="ins-header">
+        <div class="ins-icon" style="background:${ins.bg}">${ins.icon}</div>
+        <div class="ins-hbody"><div class="ins-title">${ins.title}</div><div class="ins-sub">${ins.sub}</div></div>
+        <div class="ins-chevron">›</div>
+      </div>
+      <div class="ins-content"><div class="ins-body">
+        ${ins.steps.map((s,si)=>`<div class="ins-step"><div class="ins-num">${si+1}</div><div class="ins-text">${s}</div></div>`).join('')}
+        <div class="ins-tip">${ins.tip}</div>
+      </div></div>
+    </div>`).join('');
+}
+function togIns(i){document.getElementById('ir'+i).classList.toggle('open');}
+function togN(k){
+  S.notifs[k].on=!S.notifs[k].on;
+  document.getElementById('tog'+k.charAt(0).toUpperCase()+k.slice(1)).classList.toggle('on',S.notifs[k].on);sv();
+}
+function saveN(){
+  ['morn','after','even'].forEach(k=>S.notifs[k].t=document.getElementById('t'+k.charAt(0).toUpperCase()+k.slice(1)).value);
+  sv();
+  document.getElementById('prevMsg').textContent=S.notifs.even.t+' — Juste 20 min Abdou. Tu peux le faire. 💪';
+  if('Notification'in window){
+    if(Notification.permission==='default'){Notification.requestPermission().then(p=>{if(p==='granted'){schedNotifs();toast('🔔 Notifications activées !');}else toast('⚠️ Autorise les notifications dans Réglages');});}
+    else if(Notification.permission==='granted'){schedNotifs();toast('🔔 Rappels sauvegardés !');}
+    else toast('⚠️ Autorise les notifications : Réglages → Safari → Notifications');
+  }else toast('🔔 Sauvegardés — installe l\'app pour les notifications');
+}
+function schedNotifs(){
+  const msgs=[{k:'morn',ti:'🌅 C\'est l\'heure Abdou !',b:'Commence ta session anglais avant l\'école. 20 min. 💪'},{k:'after',ti:'🏠 Tu es rentré !',b:'Lance une vidéo en anglais maintenant.'},{k:'even',ti:'⚠️ Tu n\'as pas validé ta journée',b:S.notifs.even.t+' — Juste 20 min Abdou. 💪'}];
+  msgs.forEach(({k,ti,b})=>{
+    if(!S.notifs[k].on)return;
+    const[h,mn]=S.notifs[k].t.split(':').map(Number);
+    const now=new Date(),tgt=new Date();tgt.setHours(h,mn,0,0);
+    if(tgt<=now)tgt.setDate(tgt.getDate()+1);
+    setTimeout(()=>{if(Notification.permission==='granted')try{new Notification(ti,{body:b});}catch(e){}},tgt-now);
+  });
+}
+function rNotif(){
+  ['morn','after','even'].forEach(k=>{
+    document.getElementById('t'+k.charAt(0).toUpperCase()+k.slice(1)).value=S.notifs[k].t;
+    document.getElementById('tog'+k.charAt(0).toUpperCase()+k.slice(1)).classList.toggle('on',S.notifs[k].on);
+  });
+}
+function rProf(){
+  const st=stats();
+  document.getElementById('p-d').textContent=st.d;document.getElementById('p-s').textContent=st.str;
+  document.getElementById('p-w').textContent=st.w;document.getElementById('p-p').textContent=st.pct+'%';
+  document.getElementById('mBars').innerHTML=MI.map((mi,i)=>{
+    let t=0,d=0;for(let w=i*4+1;w<=i*4+4;w++){const wd=S.wd[w];if(wd){t+=7;d+=wd.d.filter(Boolean).length;}}
+    const p=t>0?Math.round(d/t*100):0;
+    return`<div class="mrow"><div class="mname">${mi.l}</div><div class="mbarwrap"><div class="mbar" style="width:${p}%;background:${MC[i]}"></div></div><div class="mpct">${p}%</div></div>`;
+  }).join('');
+  document.getElementById('bdgGrid').innerHTML=BDGS.map(b=>{const e=b.ok(st);return`<div class="bdg ${e?'earned':''}"><div class="bde">${e?b.e:'🔒'}</div><div class="bdn">${b.n}</div></div>`;}).join('');
+}
+let toastT;
+function toast(msg){clearTimeout(toastT);const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');toastT=setTimeout(()=>el.classList.remove('show'),3500);}
+// INIT
+ld();
+// Sync current week
+const aw=autoWeek();if(S.cw<aw){S.cw=aw;sv();}
+rHome();
+setInterval(sv,30000);
+setTimeout(()=>{if('Notification'in window&&Notification.permission==='default')Notification.requestPermission();},3000);
+window.addEventListener('resize',drawChart);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){ld();if(document.getElementById('pg-home').classList.contains('on'))rHome();}});
+</script>
+</body>
+</html>
